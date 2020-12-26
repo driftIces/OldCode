@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>tab栏切换</title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			ul{
+				list-style-type: none;
+			}
+			.box{
+				width: 400px;
+				height: 300px;
+				border: 1px solid #ccc;
+				margin: 100px auto;
+				overflow: hidden;
+			}
+			.hd{
+				height: 45px;
+			}
+			.hd ul li{
+				width: 90px;
+				background-color: pink;
+				line-height: 45px;
+				text-align: center;
+				float:left;
+				padding:5px;
+				cursor: pointer;
+			}
+			.hd li.current{
+				background-color: skyblue;
+			}
+			.bd div{
+				height: 255px;
+				background-color: skyblue;
+				display:none;
+			}
+			.bd div.current{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+    <div class="hd" id="hd">
+    	<ul>
+        	<li class="current">体育</li>
+        	<li>娱乐</li>
+        	<li>新闻</li>
+        	<li>综合</li>
+    	</ul>
+    </div>
+    <div class="bd"  id="bd">
+        <div class="current">我是体育模块</div>
+        <div>我是娱乐模块</div>
+        <div>我是新闻模块</div>
+        <div>我是综合模块</div>
+    </div>
+</div>
+
+		<script>
+			var lis = document.querySelectorAll("#hd li");//获得hd下的所有li
+			for (var i = 0, len = lis.length; i < len; i++) {
+				 var li = lis[i];
+				 li.setAttribute("index",i); //把索引记录到index自定义属性中
+				 li.onmouseover = function() {  //给每一个li注册事件,每个li带动div,所以不用给div注册事件
+				 	for(i = 0, len = lis.length; i < len; i++){
+				 		lis[i].className = "";  //当鼠标移上时把所有li的current取消
+				 	}
+				 	this.className = "current";  //只把当前的高亮显示
+				 	
+				 	//当完成tab栏切换时找到对应的模块显示
+				 	var index = parseInt(this.getAttribute("index")); //获取当前li的索引,由于获取的是字符串所以需要转换
+				 	var divs = document.querySelectorAll("#bd div");
+				 	var divLen = divs.length;  //记录div的长度
+				 	for(i = 0; i < divLen; i++){
+				 		divs[i].className = "";  //取消默认显示的div
+				 	}
+				 	divs[index].className = "current";  //当前模块对应div显示
+				 };
+			}
+			
+		</script>
+	</body>
+</html>

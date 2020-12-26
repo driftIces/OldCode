@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>放大镜</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.box {
+				width: 362px;
+				height: 507px;
+				margin: 0px;
+				border: 1px solid #ccc;
+				position: relative;
+			}
+			.big {
+				width: 386px;
+				height: 540px;
+				position: absolute;
+				top: 0;
+				left: 460px;
+				border: 1px solid #ccc;
+				overflow: hidden;
+				display: none;
+			}
+			.big img {
+				position: absolute;
+			}
+			.mask {
+				width: 175px;
+				height: 175px;
+				background: rgba(255,255,0,0.4);
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				cursor: move;
+				display: none;
+			}
+			.small {
+				position: relative;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box" id="box">
+			<div class="small">
+				<img src="../img/magnifying-small.jpg" width="362px" height="507px" alt="" />
+				<div class="mask"></div>
+			</div>
+			<div class="big">
+				<img src="../img/magnifying-big.jpg" alt="" />
+			</div>
+		</div>
+		
+		<script src="../js/common.js"></script>
+		<script>
+			var box = document.getElementById("box");
+			var smallBox = box.children[0]; //获取box下的小盒子
+			var bigBox = box.children[1]; //获取box下的大盒子
+			var smallImg = smallBox.children[0]; //获取小盒子下的小图片
+			var mask = smallBox.children[1]; //获取小图片下的遮罩层
+			var bigImg = bigBox.children[0];//获取大盒子下的大图片
+			
+			//鼠标移到小盒子上显示遮罩层、大图
+			smallBox.onmouseenter = function() {
+				mask.style.display = "block";
+				bigBox.style.display = "block";
+			};
+			//鼠标离开隐藏遮罩层和大图
+			smallBox.onmouseleave = function() {
+				mask.style.display = "none";
+				bigBox.style.display = "none";
+			};
+			
+			//鼠标在小盒子移动带动遮罩层移动
+			smallBox.onmousemove = function(e) {
+				e = e || event;
+				//获取鼠标在小盒子中的坐标，为了设置mask的坐标x,y
+				var x = getPage(e).pageX - smallBox.offsetLeft;
+				var y = getPage(e).pageY - smallBox.offsetTop;
+				//鼠标移动到mask的中点,优化样式
+				x -= mask.offsetWidth / 2;
+				y -= mask.offsetHeight / 2;
+				
+				//控制x,y范围不越界
+				x = x < 0 ? 0 : x;
+				y = y < 0 ? 0 : y;
+				
+				var maxX = smallBox.offsetWidth - mask.offsetWidth;
+				var maxY = smallBox.offsetHeight - mask.offsetHeight;
+				
+				x = x > maxX ? maxX : x;
+				y = y > maxY ? maxY : y;
+				
+				mask.style.left = x +"px";
+				mask.style.top = y +"px";
+				
+				//显示对应的大图部分,利用比例求大图片的偏移
+				//mask移动的距离 / 大图片移动的距离 = mask最大能够移动的距离 / 大图片最大能够移动的距离
+				//大图片移动的距离 = mask移动的距离 * 大图片最大能够移动的距离 / mask最大能够移动的距离
+				
+				//大图片最大能够移动的距离
+				var bigMaxX = bigImg.offsetWidth - bigBox.offsetWidth;
+				var bigMaxY = bigImg.offsetHeight - bigBox.offsetHeight;
+				//大图片最大能够移动的距离
+				var bigImgX = x * bigMaxX / maxX;
+				var bigImgY = y * bigMaxY / maxY;
+				
+				bigImg.style.left = -bigImgX + "px";
+				bigImg.style.top = -bigImgY + "px";
+			};
+			
+			
+		</script>
+	</body>
+</html>

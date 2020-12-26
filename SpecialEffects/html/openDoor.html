@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>触碰开门效果</title>
+		<style>
+			.door{
+				width: 400px;
+				height: 224px;
+				margin:200px auto;
+				position:relative;
+				border: 1px solid #000;
+				background: #fff url(../img/door-bg.jpg) 0 0 no-repeat;
+				background-size: 400px;
+				perspective: 1000px;
+				/*vertical-align: top;*/
+			}
+			.door-l,.door-r{
+				top:0;
+				width: 50%;
+				height: 100%;
+				position:absolute;
+				background-color:red;
+				transition: all 0.8s;
+			}
+			.door-l{
+				left:0;
+				transform-origin: left;
+				border-right:1px solid #000;
+			}
+			.door-r{
+				right:0;
+				transform-origin: right;    /*定义在元素而不是伪类中*/
+				border-left:1px solid #000;
+			}
+			.door-l::before,.door-r::before{  /*增加门的拉环*/
+				content:"";
+				width: 20px;
+				height: 20px;				
+				top:50%;
+				transform: translateY(-50%); /*百分比Y是走自己高度的一半*/
+				position:absolute;
+				border: 1px solid #000;
+				border-radius:50%;
+			}
+			.door-l::before{
+				right:5px;
+			}
+			.door-r::before{
+				left:5px;
+			}			
+			
+			.door:hover .door-l {
+				transform: rotateY(-130deg);
+			}
+			.door:hover .door-r{
+				transform: rotateY(130deg);
+			}
+		</style>	
+	</head>
+	<body>
+	<div class="door">
+			<div class="door-l"></div>
+			<div class="door-r"></div>
+		</div>
+	</body>
+</html>

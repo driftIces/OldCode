@@ -1,0 +1,103 @@
+.w{
+	width: 1280px;
+	margin:0 auto;
+	
+	/*background-color: blue;*/
+}
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+
+button,input,a{
+	margin:0;
+	padding:0
+}
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?1tk1gb');
+  src:  url('../fonts/icomoon.eot?1tk1gb#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?1tk1gb') format('truetype'),
+    url('../fonts/icomoon.woff?1tk1gb') format('woff'),
+    url('../fonts/icomoon.svg?1tk1gb#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.login{
+	width: 550px;
+	height: 350px;
+	position:relative;
+	background-color: #6f8a5f;
+	margin-top:100px;
+	margin-left:350px;
+	
+}
+.hearder{
+	height: 200px;
+/*	background-color: pink;*/
+}
+.forget{
+	margin-left:40px;
+}
+.sign{
+	margin-left:200px;
+}
+
+.bluesky{
+	color:deepskyblue!important;
+	}
+
+i{
+	font-family:'icomoon';
+	font-style:normal;
+}
+a{
+	text-decoration:none;
+	color:#ccc;
+}
+a:hover{
+	color:#f10215;
+}
+input{
+	width: 200px;
+	height: 23px;
+	display:block;
+	margin-left:150px;
+	border:1px solid deepskyblue;
+}
+
+.form{
+	height: 40px;
+	width: 200px;
+	margin-left:150px;
+	margin-top:25px;
+	background-color: #ccc;
+
+}
+ul{
+	list-style:none;
+	margin-top:100px;
+}
+.login i{
+	display:block;
+	margin-left:150px;
+	margin-top:25px;
+	color:#ccc;
+}
+.login li{
+	border:1px solid #ccc;
+}
+
+.fonts{
+	text-align:center;
+	font-size:32px;
+	color:#ccc;
+}
+.piv{
+	background:url(../img/box.PNG) no-repeat;
+}
+
+

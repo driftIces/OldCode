@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>轮播图</title>
+		<style>
+			   * {
+				  padding: 0;
+				  margin: 0;
+				  list-style: none;
+				  border: 0;
+				}
+				
+				.all {
+				  width: 500px;
+				  height: 200px;
+				  padding: 7px;
+				  border: 1px solid #ccc;
+				  margin: 100px auto;
+				  position: relative;
+				}
+				
+				.screen {
+				  width: 500px;
+				  height: 200px;
+				  overflow: hidden;
+				  position: relative;
+				}
+				
+				.screen li {
+				  width: 500px;
+				  height: 200px;
+				  overflow: hidden;
+				  float: left;
+				}
+				
+				.screen ul {
+				  position: absolute;
+				  left: 0;
+				  top: 0px;
+				  width: 3000px;
+				}
+				
+				.all ol {
+				  position: absolute;
+				  right: 10px;
+				  bottom: 10px;
+				  line-height: 20px;
+				  text-align: center;
+				}
+				
+				.all ol li {
+				  float: left;
+				  width: 20px;
+				  height: 20px;
+				  background: #fff;
+				  border: 1px solid #ccc;
+				  margin-left: 10px;
+				  cursor: pointer;
+				}
+				
+				.all ol li.current {
+				  background: yellow;
+				}
+				
+				#arr {
+				  display: none;
+				  z-index: 1000;
+				
+				}
+				
+				#arr span {
+				  width: 40px;
+				  height: 40px;
+				  position: absolute;
+				  left: 5px;
+				  top: 50%;
+				  margin-top: -20px;
+				  background: #000;
+				  cursor: pointer;
+				  line-height: 40px;
+				  text-align: center;
+				  font-weight: bold;
+				  font-family: '黑体';
+				  font-size: 30px;
+				  color: #fff;
+				  opacity: 0.3;
+				  border: 1px solid #fff;
+				}
+				
+				#arr #right {
+				  right: 5px;
+				  left: auto;
+				}
+		</style>
+	</head>
+	<body>
+		<div class="all" id="box">
+			<div class="screen">
+				<ul>
+					<li><img src="../img/wf1.jpg" width="500" height="200"/></li>
+		            <li><img src="../img/wf2.jpg" width="500" height="200"/></li>
+		            <li><img src="../img/wf3.jpg" width="500" height="200"/></li>
+		            <li><img src="../img/wf4.jpg" width="500" height="200"/></li>
+		            <li><img src="../img/wf5.jpg" width="500" height="200"/></li>
+				</ul>
+				<ol>
+				</ol>
+			</div>
+			<div id="arr"><span id="left">&lt;</span><span id="right">&gt;</span></div>
+		</div>
+		
+		<script src="../js/common.js"></script>
+		<script src="../js/animate.js"></script>
+		
+		<script>
+			//获取对应的元素
+			var box = document.getElementById("box");
+			var screen = box.children[0];
+			var ul = screen.children[0];
+			var ol = screen.children[1];
+			//获取箭头的容器
+			var arr = box.children[1];
+			var arrLeft = arr.children[0];
+			var arrRight = arr.children[1];
+			
+			//获取图片的宽度
+			var imgWidth = screen.offsetWidth;
+			//设置定时器的时间间隔
+			var interval = 2000;
+			//根据图片个数动态生成ol列表的序号
+			var count = ul.children.length;
+			for (var i = 0; i < count; i++) {
+				//创建序号
+				var li = document.createElement("li");
+				ol.appendChild(li);
+				setInnerText(li, i + 1);
+				
+				//点击序号切换图片,li记录自己索引
+				li.index = i;
+				li.onclick = liClick;//注册事件
+				//让第一个图片默认选中
+				if (i == 0) {
+				li.className = "current";
+			}
+		}
+			function liClick() {
+			    animate(ul, -this.index * imgWidth);
+			    //取消所有li的高亮显示,只让当前li高亮显示
+			    for (i = 0; i < count; i++) {
+			    	li = ol.children[i];
+			    	li.className = "";
+			    }
+			    this.className = "current";
+			    
+			    //记录全局index,便于切换下一张、上一张
+			}
+			//鼠标经过显示箭头,离开则隐藏
+			box.onmouseover = function() {
+				arr.style.display = "block";
+				//停止自动滚动的计时器
+				clearInterval(timerId);
+			};
+			box.onmouseout = function() {
+				arr.style.display = "none";
+				//鼠标离开则再开启定时器
+				timerId = setInterval(function() {
+					arrRight.click();
+				}, interval);
+			};
+			//点击箭头实现切换上一张或下一张的功能
+			var index = 0;
+			arrRight.onclick = function() {
+				if (index == count) {
+					index = 0;
+					ul.style.left = "0px";
+				}
+				index++;
+				//当当前索引小于列表总数时,给当前序号li模拟click点击
+				if (index < count) { 
+					ol.children[index].click();
+				} else {
+					//当index和count相等时以动画方式切换到克隆的第一张图片
+					animate(ul, -index * imgWidth);
+					//取消li的高亮显示
+					for (i = 0; i < count; i++) {
+						li = ol.children[i];
+						li.className = "";
+					}
+					ol.children[0].className = "current";
+				}
+			};
+			//点击左箭头切换上一张
+			arrLeft.onclick = function() {
+				//如果index是第一张,偷偷切换到克隆的第一张
+				if (index == 0) {
+					index = count;
+					ul.style.left = -index * imgWidth +"px";
+				}
+				index--;
+				ol.children[index].click();//给序号模拟点击click
+			};
+			
+			//无缝滚动最关键是复制第一个li,添加到ul的最后
+			var cloneLi = ul.children[0].cloneNode(true);
+			ul.appendChild(cloneLi);
+			
+			//设置一个计时器自动切换图片
+			var timerId = setInterval(function() {
+				arrRight.click();
+			},interval);
+			
+		</script>
+	</body>
+</html>

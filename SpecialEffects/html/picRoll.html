@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片无缝滚动</title>
+		<style>
+			.picRoll{
+				width: 875px;
+				margin:0 auto;
+				border: 1px solid skyblue;
+				overflow:hidden;
+			}
+			.picRoll ul{
+				width: 1750px;
+				height: 96px;
+				padding:0;
+				animation: roll 5s linear infinite;
+			}
+			.picRoll:hover ul{
+				animation-play-state: paused;
+			}
+			.picRoll ul li{
+				list-style: none;
+				float:left;
+			}
+			@keyframes roll{
+				form{
+					transform: translate3d(0,0,0);
+				}
+				to{
+					transform: translate3d(-875px,0,0);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="picRoll">
+			<ul>
+				<li><img src="../img/roll-one.jpeg" alt="" /></li>
+				<li><img src="../img/roll-two.jpeg" alt="" /></li>
+				<li><img src="../img/roll-three.jpeg" alt="" /></li>
+				<li><img src="../img/roll-four.jpeg" alt="" /></li>
+				<li><img src="../img/roll-five.jpeg" alt="" /></li>
+				<li><img src="../img/roll-one.jpeg" alt="" /></li>
+				<li><img src="../img/roll-two.jpeg" alt="" /></li>
+				<li><img src="../img/roll-three.jpeg" alt="" /></li>
+				<li><img src="../img/roll-four.jpeg" alt="" /></li>
+				<li><img src="../img/roll-five.jpeg" alt="" /></li>
+			</ul>
+			
+		</div>
+	</body>
+</html>

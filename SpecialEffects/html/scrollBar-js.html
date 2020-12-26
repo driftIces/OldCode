@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>滚动条</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.box {
+				width: 300px;
+				height: 500px;
+				border: 1px solid red;
+				margin: 50px auto;
+				position: relative;
+				overflow: hidden;
+				
+				/* 不让文字被选中 */
+			    -webkit-user-select:none;
+			    -moz-user-select:none;
+			    -ms-user-select:none;
+			    user-select:none;
+			}
+			.content {
+				padding: 5px 18px 5px 5px;
+				position: absolute;
+				font-size: 14px;
+				font-family:"楷体";
+				top: 0;
+				left: 0;
+			}
+			.scroll {
+				width: 18px;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				right: 0;
+				background-color: #eee;
+			}
+			.bar {
+				height: 100px;
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: #ccc;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box" id="box">
+			<div class="content" id="content">
+			 <h4>三日寂静。</h4>
+				
+				<p>细雪纷散如云似烟淀满山头，吐息间流转的团团白雾无声蒸泛而起，又在须臾之间消迹无痕。头顶投落的明靡冷阳只可为照明，不具与这千年冰雪抗衡的力量。</p>
+				<p>指腹搓动石头粗糙表层牢靠定稳，单手携凿器来回锤锻，砺石摩擦的扎耳钝音破空炸响，下一瞬宛如被山谷接纳稀释，徒自悠然回荡犹显空灵。</p>
+				<p>寒来暑往，春去秋来，任凭无端而生的执念逐渐增殖积淤心头，断续凿削石面尽力改变形状，院内早已堆沉不少尘埃破砾。</p>
+				<p>为了见白玛。</p>
+				<p>这块顽石需成为我心中所想的形状，犹如徒劳度日，它不见半点起色，内心空如白纸，浑然不知如何去想。</p>
+				<p>午日温度逐步升高，乏倦始来怠缓四肢，默然抵摁地面舒腿落坐栖于石表。黑发拉锯阴影掩去溟茫神色，劲风旋荡刘海干扰视线，挪动脚跟转往反向恰见影子迎随动作变化形状。</p>
+				<p>“你如一块石头一样，见和不见，都没有区别。当你雕刻的这块石头有了有意义的形状，你才能去见那个女人。”</p>	
+				<p>我如石头。</p>
+				<p>倏然顿止身形，沉目察鉴那块黑影断节分明的缀线，犹如炸雷劈地如梦初醒，——按影勾绘石头，赋予它有意义的形状。随从直觉凌然脆断拾起凿子仿照地上图案精准雕琢，不出几日便被引进那个女人所在的房屋。</p>
+				
+				
+				<p>……</p>
+				<p>…………</p>
+				<p>一日。</p>
+				<p>她就在那里。</p>
+				<p>她一动不动的躺在那里。</p>
+				<p>杵在一旁注视那浅吸缓吐、白如雪色的虚弱面容，只觉这番景象过于虚幻，太过仓促。</p>
+				
+				
+				<p>二日。</p>
+				<p>我是为何而生，你想告诉我什么。</p>
+				<p>她一点信息都不传达给我，甚至没有为了呼唤自己发出哪怕一点声音。</p>
+				<p>分明梳戴整齐不见丝毫凌乱，可无论怎样接近她都只能感觉到她身上的死气，潜隐在那僵硬皮肤下的血液像是块状固体一样极慢流动，毫无修饰的沉睡姿态，被呼吸压制到极低的心率，只有这点生存迹象，跟苟延残喘的活尸别无二致。</p>
+				<p>这个能带给我与世界的一丝联系的人，就像泡沫幻象，动弹就会灰飞烟灭，眨眼就会消弭殆尽。</p>
+				
+				
+				<p>三日。</p>
+				<p>茫然螺旋上转占满空间极为压抑，喉颤想呐喊却无法发出一丝声音，寂静过度的空间缭转庞重杂响像是万人在细碎耳语——我能做到什么，事到如今该做什么才能挽回事态。</p>
+				<p>“你不能是一块石头，让你的母亲，感觉不到你的存在。”</p>
+				<p>抛却毫无根据的夷犹与不愿承认的失落，紧紧握住那只与雪色无异的手掌，竭尽全力把温度递渡过去。</p>
+				<p>是什么在推动我抓紧这只手，这一举动到底有什么意义。</p>
+				<p>这一切太仓促了。还未理解就要消失。</p>
+				<p>“你要学会去想，去想念，你母亲送给你的第一件也是最后一件礼物，会是你被那些人遮蔽的心。”</p>
+				<p>母亲苍白的脸庞爬上些许血色，内心忽然产生从未有过的奇异波动，好比被一滴水珠叩击心扉，漾起层圈涟漪。</p>
+				<p>我的手里握着的是我存活于世的最后一丝痕迹，是我愿意、是我能够想的最后一个东西。</p>
+				<p>她的眼皮兀然出现了轻微的蠕动，心脏没由来的一紧，不知从心底哪个角落冒起浓烈的期许，一味死盯着母亲的眼帘初次渴望得到回应，那手却突然像没了经脉直直坠落。</p>
+				
+				<p>……</p>
+				<p>…………</p>
+				<p>惯常归于庭内切磨碎石，不懂凿石为了什么只是耐心专治缓缓淬炼石像，堪堪成形便认出那熟悉的轮廓，——那是母亲的面容。</p>
+				<p>沉寂于迷雾里的思绪如同拨云见月，瞬息理解此刻行为指代的意义、</p>
+				<p>“这块石头最终的形状，就是你心里所想的东西。”</p>
+				<p>也悟知了何为心里所想。</p>
+				<p>母亲离去的记忆于眼前反复播放又在顿悟一刹那哑然而止，如同薄脆玻璃从中心陡然锐生裂纹溅落一地，绝望仿佛卡顿了一个世纪迟迟到来，指头颤动跌跌撞撞达至顶点，奇异波动倾息蜂出泉流汨汨淌现，情感决堤又如跗骨之蛆铺天盖地吞没自我，措手不及。</p>
+				<p>在漆黑深渊里，睁开了双眼。在无边荒芜里，获取了意识。</p>
+				<p>凭空爆发的蛮力犹如无缝钢网绞紧心脏，顿时勒出段段斑痕。几乎同时猖狂嚣爆的无形爪刃极为凶狠地扼住咽喉，陡然受困于窄隘狭缝，胸闷气短无息激昂，四周仅剩嘶叮耳鸣。我站立于此，又无物可证我存在于此。</p>
+				<p>她是狂沙里不断前行的灯火，一路指引我至此，却给我留下无尽怅然空虚，只得到了对未知的踟蹰无措。</p>
+				<p>希望她能活下来。</p>
+				<p>永无回应的祈愿写满讽刺哂意，微不足道渺小的烛焰摇摇欲坠归于虚无，脑内霎时爬满了足以用慌乱修饰的体验。远胜冰雪的森冷阴寒疾驰而来盘踞周遭，一顿一波徐缓钻透百骸，随同氧气渗进血液，瞬息显露狰狞本相，从头皮撼至脚底，锋锐又钝重。</p>
+				<p>初识痛楚，却不知它该去往何处。</p>
+				<p>方衔接上的情感齿轮遭到重物碰撞顿时偏移轨道相互摩擦溅射火星，钻心苦楚溶于血肉密不可分，眼里失焦好似空蝉颓然跌坐雪地，蜷缩成一团。</p>
+				<p>人死了，就像水消失在水里。</p>
+				<p>万籁俱寂。</p>
+				
+			</div>
+				<div class="scroll" id="scroll">
+				<div class="bar" id="bar"></div>
+		   </div>
+		</div>
+		
+		<script src="../js/common.js"></script>
+		<script type="text/javascript">
+			var box = my$("box");
+			var content = my$("content");
+			var scroll = my$("scroll");
+			var bar = my$("bar");
+			
+			//首先根据content的大小动态生成滚动条的高度
+			//box的高度/content的高度 = bar的高度/scroll的高度
+			var barHeight = 0;
+			if(content.scrollHeight > box.offsetHeight) {
+				barHeight = box.offsetHeight / content.scrollHeight * scroll.offsetHeight;
+			}
+			bar.style.height = barHeight +"px";
+			
+			//拖动滚动条,鼠标按下bar时计算鼠标在bar上的位置
+			bar.onmousedown = function(e) {
+				e = e || event;
+				//鼠标在bar中的位置
+			    var barY = getPage(e).pageY - bar.offsetTop - box.offsetTop;
+			    //事件中嵌套事件,鼠标移动时计算bar在父容器的坐标,
+			    document.onmousemove = function(e) {
+			    	e = e || event;
+			    	//bar在父容器的位置就是y移动的距离,设置跟随鼠标一起移动
+			    	var y = getPage(e).pageY - barY - box.offsetTop;
+			    	//限制bar不能越界
+			    	y = y < 0 ? 0 : y;
+			    	var barMaxY = scroll.offsetHeight - barHeight;
+			    	y = y > barMaxY ? barMaxY : y;
+			    	bar.style.top = y + "px";
+			    	
+			    	//当鼠标按住滚动条移动时,左边的内容按照一定比例反向移动
+			    	//bar移动的距离/内容移动的距离 = bar最大移动的距离/内容最大移动的距离
+			    	//内容移动的距离 = bar移动的距离 * 内容最大移动的距离/bar最大移动的距离
+			    	
+			    	var contentMaxY = content.scrollHeight - box.offsetHeight;
+			    	var contentY = y * contentMaxY / barMaxY;
+			    	content.style.top = -contentY + "px";
+			    };
+				
+			};
+			//鼠标弹起时移出移动事件
+			document.onmouseup = function() {
+				document.onmousemove = null;
+			};
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

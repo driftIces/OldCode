@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>拖拽不超出边界</title>
+		<style>
+			.login-header {
+				width: 100%;
+				text-align: center;
+				height: 30px;
+				font-size: 24px;
+				line-height: 30px;
+			}
+			ul,li,ol,dl,dt,dd,div,p,span,h1,h2,h3,h4,h5,h6,a {
+				padding: 0;
+				margin: 0;
+			}
+			.login {
+				width: 512px;
+				height: 280px;
+				position: absolute;
+				border: 1px solid #ebebeb;
+				left: 50%;
+				right: 50%;
+				background: #fff;
+				box-shadow: 0px 0px 20px #ddd;
+				z-index: 9999;
+				margin-left: -256px;
+				margin-top: 140px;
+				display: none;
+			}
+			.login-title {
+				width: 100%;
+				margin: 10px 0px 0px 0px;
+				text-align: center;
+				line-height: 40px;
+				height: 40px;
+				font-size: 18px;
+				position: relative;
+				cursor: move;
+				-moz-user-select:none;/*火狐*/
+            	-webkit-user-select:none;/*webkit浏览器*/
+            	-ms-user-select:none;/*IE10*/
+            	-khtml-user-select:none;/*早期浏览器*/
+            	user-select:none;
+			}
+			.login-input-content {
+				margin-top: 20px;
+			}
+			.login-button {
+				width: 50px;
+				margin: 30px auto 0px auto;
+				line-height: 40px;
+				font-size: 14px;
+				border: 1px solid #ebebeb;
+				text-align: center;
+			}
+			.login-bg {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				background: #000;
+				filter: alpha(opacity=30);
+				-moz-opacity: 0.3;
+				-khtml-opacity: 0.3;
+				opacity: 0.3;
+				display: none;
+			}
+			a {
+				text-decoration: none;
+				color: #000;
+			}
+			.login-button a {
+				diplay: block;
+			}
+			.login-input input.list-input {
+				float: left;
+				line-height: 35px;
+				height: 35px;
+				width: 350px;
+				border: 1px solid #ebebeb;
+				text-indent: 5px;
+			}
+			.login-input {
+				overflow: hidden;
+				margin: 0px 0px 20px 0px;
+			}
+			.login-input label {
+				float: left;
+				width: 90px;
+				padding-right: 10px;
+				text-align: right;
+				line-height: 35px;
+				height: 35px;
+				font-size: 14px;
+			}
+			.login-title span {
+				position: absolute;
+				font-size: 12px;
+				right: -20px;
+				top: -30px;
+				background: #fff;
+				border: 1px solid #ebebe;
+				width: 40px;
+				height: 40px;
+				border-radius: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="login-header"><a href="javascript:void(0)" id="link">点此登录</a></div>
+		<div class="login" id="login">
+			<div id="title" class="login-title">登录会员
+				<span><a href="javascript:void(0);" id="closeBtn" class="close-login">关闭</a></span>
+			</div>
+			<div class="login-input-content">
+				<div class="login-input">
+					<label>用户名：</label>
+					<input type="text" placeholder="请输入用户名" name="info[username]" id="username" class="list-input"/>
+				</div>
+				<div class="login-input">
+					<label>登录密码：</label>
+					<input type="password" placeholder="请输入登录密码" name="info[password]" id="password" class="list-input" />
+				</div>
+			</div>
+			<div id="loginBtn" class="login-button"><a href="javascript:void(0);" id="login-button-submit">登录</a></div>
+		</div>
+		<!--遮盖层-->
+		<div id="bg" class="login-bg"></div>
+		
+		<script src="../js/common.js"></script>
+		<script>
+			var login = document.getElementById("login");//获取登录窗口元素
+			var link = document.getElementById("link");//获取点此登录元素
+			link.onclick = function() { //点击时让登录框和遮盖层显示出来
+				var bg = document.getElementById("bg");
+				login.style.display = "block";
+				bg.style.display = "block";
+			}
+			//实现拖拽功能
+			var title = document.getElementById("title");//获取可拖拽的头部
+			title.onmousedown = function(e) {
+				e = e || event;  //简单处理兼容性
+				var x = getPage(e).pageX - login.offsetLeft;//计算：鼠标在盒子中的坐标 = 鼠标在页面的坐标 - 盒子在页面中的坐标
+				var y = getPage(e).pageY - login.offsetTop;
+				
+				//鼠标移动时注册事件,即事件中嵌套事件
+				document.onmousemove = function(e) {
+					e = e || event;
+					var loginX = getPage(e).pageX - x;//计算盒子在页面中的位置,达到控制盒子移动范围和设置盒子在页面中的距离的目的
+					var loginY = getPage(e).pageY - y;
+					
+					//控制盒子的移动范围
+					if(loginX < 0) {  //超出左边则设置回原点
+						loginX = 0;
+					}
+					if(loginY < 21) {
+						loginY = 21;
+					}
+					//获取页面和盒子的大小,让盒子无法移出右下角
+					//盒子的大小login.offsetWidth,页面的大小window.innerWidth;
+					if (loginX > window.innerWidth - login.offsetWidth - 21) {
+						loginX = window.innerWidth - login.offsetWidth -21;
+					}
+					if(loginY > window.innerHeight - login.offsetHeight) {
+						loginY = window.innerHeight - login.offsetHeight;
+					}
+					
+					login.style.left = loginX + 256 + "px";
+					login.style.top = loginY - 140 +"px";
+				}
+			}
+			document.onmouseup = function() {
+				document.onmousemove = null;
+			}
+		</script>
+	</body>
+</html>

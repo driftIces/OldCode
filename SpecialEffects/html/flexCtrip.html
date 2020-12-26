@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>携程网伸缩布局</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				min-width: 320px; /* 设置伸缩的最小宽度 */
+				max-width: 540px; /* 设置伸缩的最大宽度 */
+				margin: 0 auto;
+			}
+			header{
+				width: 100%;    /*继承body的宽度，百分比布局可伸缩*/
+				height: 100px;  /*设定一个固定高度*/
+			}
+			header img{
+				width: 100%;  /*继承header的宽度，百分比布局可伸缩*/
+				height: 100%; /*继承header的高度，百分比布局可伸缩*/
+			}
+			ul{
+				list-style: none;
+				padding: 0;
+			}
+			
+			nav{
+				padding: 5px;
+			}
+			.row{
+				width: 100%;
+				height: 90px;
+				background-color: #ff697a;
+				border-radius: 8px;
+				display: flex;  /*设置伸缩布局,放在父盒子中*/
+				margin-bottom: 5px;
+				/*margin: 5px;*/
+			}
+			.row:nth-child(2){
+				background-color: #3d98ff;
+			}
+			.row:nth-child(3){
+				background-color: #44c522;
+			}
+			.row:nth-child(4){
+				background-color: #fc9720;
+			}
+			.col{
+				flex: 1;/* 设置每个孩子一人一分*/
+				border-left: 1px solid #fff;
+			}
+			.col:first-child{
+				border: 0;
+			}
+			.flex-col{
+				display:flex;
+				flex-direction: column;  /* 纵向排列  */
+			}
+			.flex-col a{
+				flex: 1;
+				font-size: 16px;
+				color: #fff;
+				text-align: center;
+				line-height: 45px;
+				text-decoration: none;
+				text-shadow: 0 2px 1px rgba(0, 0 ,0 , .4);
+			}
+			.flex-col a:first-child{
+				border-bottom: 1px solid #fff; /* 因为纵向排列垂直分布所以不用担心盒子被撑开  */
+			}
+			
+		</style>
+	</head>
+	<body>
+		<header>
+			<img src="../img/ctrip.jpg" alt="" />
+		</header>
+		<nav>
+			<div class="row">
+				<div class="col">酒店</div>
+				<div class="col flex-col">
+					<a href="#">海外酒店</a>
+					<a href="#">特价酒店</a>
+				</div>
+				<div class="col flex-col">
+					<a href="#">团购</a>
+					<a href="#">民宿·客栈</a>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col">机票</div>
+				<div class="col flex-col">
+					<a href="#">火车票·抢票</a>
+					<a href="#">特价机票</a>
+				</div>
+				<div class="col flex-col">
+					<a href="#">汽车票·船票</a>
+					<a href="#">专车·租车</a>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col">旅游</div>
+				<div class="col flex-col">
+					<a href="#">目的地攻略</a>
+					<a href="#">周边游</a>
+				</div>
+				<div class="col flex-col">
+					<a href="#">游轮旅游</a>
+					<a href="#">定制旅游</a>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col flex-col">
+					<a href="#">景点·玩乐</a>
+					<a href="#">礼品卡</a>
+				</div>
+				<div class="col flex-col">
+					<a href="#">美食林</a>
+					<a href="#">WiFi·电话卡</a>
+				</div>
+				<div class="col flex-col">
+					<a href="#">购物·外汇</a>
+					<a href="#">保险·签证</a>
+				</div>
+			</div>
+		</nav>
+	</body>
+</html>
